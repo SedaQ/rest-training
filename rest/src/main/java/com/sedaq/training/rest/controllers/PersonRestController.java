@@ -1,6 +1,7 @@
 package com.sedaq.training.rest.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
@@ -46,7 +47,7 @@ public class PersonRestController {
 	private ObjectMapper objectMapper;
 
 	@Autowired
-	public PersonRestController(PersonFacade personFacade, ObjectMapper objectMapper) {
+	public PersonRestController(PersonFacade personFacade, @Qualifier("objMapperRESTApi") ObjectMapper objectMapper) {
 		this.personFacade = personFacade;
 		this.objectMapper = objectMapper;
 	}
@@ -100,7 +101,7 @@ public class PersonRestController {
 				return new ResponseEntity<>(userResource, HttpStatus.OK);
 			}
 		} catch (FacadeLayerException ex) {
-			throw new ResourceNotFoundException(ex.getLocalizedMessage());
+			throw new ResourceNotFoundException(ex);
 		}
 	}
 	// @formatter:on

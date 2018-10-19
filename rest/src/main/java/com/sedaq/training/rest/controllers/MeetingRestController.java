@@ -79,7 +79,7 @@ public class MeetingRestController {
 				return new ResponseEntity<>(meetingResource, HttpStatus.OK);
 			}
 		} catch (FacadeLayerException ex) {
-			throw new ResourceNotFoundException(ex.getLocalizedMessage());
+			throw new ResourceNotFoundException(ex);
 		}
 	}
 	// @formatter:on
@@ -108,7 +108,7 @@ public class MeetingRestController {
 				return new ResponseEntity<>(meetingResource, HttpStatus.OK);
 			}
 		} catch (FacadeLayerException ex) {
-			throw new ResourceNotFoundException(ex.getLocalizedMessage());
+			throw new ResourceNotFoundException(ex);
 		}
 	}
 	// @formatter:on

@@ -6,7 +6,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.*;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sedaq.training.facade.config.FacadeConfig;
 
 /**
@@ -50,6 +54,7 @@ import com.sedaq.training.facade.config.FacadeConfig;
 @EnableSpringDataWebSupport
 @Import({ FacadeConfig.class })
 @ComponentScan("com.sedaq.training.rest")
+@PropertySource("file:${path.to.config.file}")
 public class RestConfigTraining extends SpringBootServletInitializer {
 
 	@Override
@@ -59,6 +64,33 @@ public class RestConfigTraining extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestConfigTraining.class, args);
+	}
+
+	@Bean
+	@Primary
+	public MappingJackson2HttpMessageConverter jacksonHTTPMessageConverter() {
+		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+		jsonConverter.setObjectMapper(objectMapperForRestAPI());
+		return jsonConverter;
+	}
+
+	@Bean(name = "objMapperRESTApi")
+	@Primary
+	public ObjectMapper objectMapperForRestAPI() {
+		ObjectMapper obj = new ObjectMapper();
+		obj.registerModule(new JavaTimeModule());
+		obj.setPropertyNamingStrategy(snakeCase());
+		return obj;
+	}
+
+	/**
+	 * Naming strategy for returned JSONs.
+	 *
+	 * @return Naming Strategy for JSON properties
+	 */
+	@Bean(name = "properyNamingSnakeCase")
+	public PropertyNamingStrategy snakeCase() {
+		return PropertyNamingStrategy.SNAKE_CASE;
 	}
 
 }

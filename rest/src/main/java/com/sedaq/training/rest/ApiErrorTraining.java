@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  * 
- * @author Pavel Seda (441048)
+ * @author Pavel Seda
  *
  */
 public class ApiErrorTraining {

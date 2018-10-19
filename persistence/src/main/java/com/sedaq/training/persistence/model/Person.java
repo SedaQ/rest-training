@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -23,6 +24,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NaturalId;
+
 import com.sedaq.training.persistence.model.enums.Role;
 
 /**
@@ -38,6 +41,7 @@ public class Person implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_person", updatable = false, nullable = false)
 	private Long idPerson;
+	@NaturalId
 	@Column(nullable = false, length = 100)
 	private String email;
 	@Column(nullable = false)
@@ -69,7 +73,8 @@ public class Person implements Serializable {
 	@OneToMany(targetEntity = Relationship.class, mappedBy = "person2")
 	private Set<Person> persons2 = new HashSet<>();
 
-	public Person() {}
+	public Person() {
+	}
 
 	public Long getIdPerson() {
 		return idPerson;
@@ -193,6 +198,23 @@ public class Person implements Serializable {
 
 	public void setPersons2(Set<Person> persons2) {
 		this.persons2 = new HashSet<>(persons2);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(email);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Person))
+			return false;
+		Person other = (Person) obj;
+		return Objects.equals(email, other.getEmail());
 	}
 
 	@Override
