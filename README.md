@@ -78,14 +78,14 @@ spring.jmx.enabled = false
 
 ## 3. Database migration
 Prerequisities running PostgreSQL and created database named 'training' with schema 'public'.
-To migrate database data it is necessary to run these two scripts:
+To migrate database data it is necessary to run this command:
 
 ```
-$ mvn flyway:migrate -Djdbc.url=jdbc:postgresql://{url to DB}/training -Djdbc.username={username in DB} -Djdbc.password={password to DB}
+$ mvn flyway:migrate -Djdbc.url=jdbc:postgresql://{url to DB}/rest-training -Djdbc.username={username in DB} -Djdbc.password={password to DB}
 ```
 e.g.:
 ```
-$ mvn flyway:migrate -Djdbc.url=jdbc:postgresql://localhost:5432/training -Djdbc.username=postgres -Djdbc.password=postgre
+$ mvn flyway:migrate -Djdbc.url=jdbc:postgresql://localhost:5432/rest-training -Djdbc.username=postgres -Djdbc.password=postgre
 
 ```
 
