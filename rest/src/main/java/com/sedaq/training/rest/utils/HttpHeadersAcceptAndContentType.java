@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
  */
 public class HttpHeadersAcceptAndContentType {
 
+	private HttpHeadersAcceptAndContentType(){}
+
 	public static boolean isJson(HttpHeaders headers) {
 		List<MediaType> mediaTypes = headers.getAccept();
 		for (MediaType mt : mediaTypes) {
@@ -20,10 +22,7 @@ public class HttpHeadersAcceptAndContentType {
 			}
 		}
 		MediaType mt = headers.getContentType();
-		if (mt != null && mt.getType().equals(MediaType.APPLICATION_JSON_VALUE)) {
-			return true;
-		}
-		return false;
+		return mt != null && mt.getType().equals(MediaType.APPLICATION_JSON_VALUE) ? true : false;
 	}
 
 	public static boolean isXML(HttpHeaders headers) {
@@ -34,10 +33,7 @@ public class HttpHeadersAcceptAndContentType {
 			}
 		}
 		MediaType mt = headers.getContentType();
-		if (mt != null && mt.getType().equals(MediaType.APPLICATION_ATOM_XML_VALUE)) {
-			return true;
-		}
-		return false;
+		return mt != null && mt.getType().equals(MediaType.APPLICATION_ATOM_XML_VALUE) ? true : false;
 	}
 
 }

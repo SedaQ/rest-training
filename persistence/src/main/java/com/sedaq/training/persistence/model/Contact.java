@@ -34,6 +34,7 @@ public class Contact implements Serializable {
 	private ContactType contactType;
 
 	public Contact() {
+		// hibernate requires non-args constructor
 	}
 
 	public Long getIdContact() {

@@ -45,6 +45,7 @@ public class Meeting implements Serializable {
 	private Set<Person> persons = new HashSet<>();
 
 	public Meeting() {
+		// hibernate requires non-args constructor
 	}
 
 	public Long getIdMeeting() {

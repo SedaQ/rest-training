@@ -20,6 +20,7 @@ public class MeetingDTO {
 	private String note;
 
 	public MeetingDTO() {
+		// used to inicialize mapping from entity
 	}
 
 	public Long getIdMeeting() {

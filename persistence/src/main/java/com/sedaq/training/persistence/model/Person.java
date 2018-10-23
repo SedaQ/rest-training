@@ -74,6 +74,7 @@ public class Person implements Serializable {
 	private Set<Person> persons2 = new HashSet<>();
 
 	public Person() {
+		// hibernate requires non-args constructor
 	}
 
 	public Long getIdPerson() {

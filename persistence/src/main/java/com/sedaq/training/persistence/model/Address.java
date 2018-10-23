@@ -39,6 +39,7 @@ public class Address implements Serializable {
 	private Set<Person> persons = new HashSet<>();
 
 	public Address() {
+		//hibernate requires non-args constructor
 	}
 
 	public Long getIdAddress() {

@@ -33,6 +33,7 @@ public class ContactType implements Serializable {
 	private Set<Contact> contacts = new HashSet<>();
 
 	public ContactType() {
+		// hibernate requires non-args constructor
 	}
 
 	public Long getIdContactType() {

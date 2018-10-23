@@ -35,6 +35,7 @@ public class PersonDTO {
 	private Integer age;
 
 	public PersonDTO() {
+		// used to inicialize mapping from entity
 	}
 
 	public Long getIdPerson() {

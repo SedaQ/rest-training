@@ -81,7 +81,7 @@ public class CustomRestExceptionHandlerTraining extends ResponseEntityExceptionH
 			final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
 		LOG.debug("handleMethodArgumentNotValid({}, {}, {}, {})", new Object[] { ex, headers, status, request });
 
-		final List<String> errors = new ArrayList<String>();
+		final List<String> errors = new ArrayList<>();
 		for (final FieldError error : ex.getBindingResult().getFieldErrors()) {
 			errors.add(error.getField() + ": " + error.getDefaultMessage());
 		}
@@ -99,7 +99,7 @@ public class CustomRestExceptionHandlerTraining extends ResponseEntityExceptionH
 			final HttpStatus status, final WebRequest request) {
 		LOG.debug("handleBindException({}, {}, {}, {})", new Object[] { ex, headers, status, request });
 
-		final List<String> errors = new ArrayList<String>();
+		final List<String> errors = new ArrayList<>();
 		for (final FieldError error : ex.getBindingResult().getFieldErrors()) {
 			errors.add(error.getField() + ": " + error.getDefaultMessage());
 		}
@@ -198,7 +198,6 @@ public class CustomRestExceptionHandlerTraining extends ResponseEntityExceptionH
 	@ExceptionHandler(BadGatewayException.class)
 	public ResponseEntity<Object> handleBadGatewayException(final BadGatewayException ex, final WebRequest request,
 			HttpServletRequest req) {
-		// LOGGER.debug("handleBadGatewayException({}, {}, {})", ex, request, req);
 
 		final ApiErrorTraining apiError = new ApiErrorTraining.ApiErrorBuilder(
 				BadGatewayException.class.getAnnotation(ResponseStatus.class).value(), ex.getLocalizedMessage())
@@ -210,7 +209,6 @@ public class CustomRestExceptionHandlerTraining extends ResponseEntityExceptionH
 	@ExceptionHandler(BadRequestException.class)
 	public ResponseEntity<Object> handleBadRequestException(final BadRequestException ex, final WebRequest request,
 			HttpServletRequest req) {
-		// LOGGER.debug("handleBadRequestException({}, {}, {})", ex, request, req);
 
 		final ApiErrorTraining apiError = new ApiErrorTraining.ApiErrorBuilder(
 				BadRequestException.class.getAnnotation(ResponseStatus.class).value(), ex.getLocalizedMessage())
@@ -577,7 +575,7 @@ public class CustomRestExceptionHandlerTraining extends ResponseEntityExceptionH
 	public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
 		LOG.debug("handleAccessDeniedException({}, {})", new Object[] { ex, request });
 
-		return new ResponseEntity<Object>("Access denied message here", new HttpHeaders(), HttpStatus.FORBIDDEN);
+		return new ResponseEntity<>("Access denied message here", new HttpHeaders(), HttpStatus.FORBIDDEN);
 	}
 
 	// handle illegal argument exceptions e.g. given payload is not valid against
@@ -608,7 +606,7 @@ public class CustomRestExceptionHandlerTraining extends ResponseEntityExceptionH
 			final WebRequest request, HttpServletRequest req) {
 		LOG.debug("handleConstraintViolation({}, {}, {})", new Object[] { ex, request, req });
 
-		final List<String> errors = new ArrayList<String>();
+		final List<String> errors = new ArrayList<>();
 		for (final ConstraintViolation<?> violation : ex.getConstraintViolations()) {
 			errors.add(violation.getRootBeanClass().getName() + " " + violation.getPropertyPath() + ": "
 					+ violation.getMessage());

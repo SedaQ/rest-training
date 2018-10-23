@@ -132,9 +132,9 @@ public class ApiErrorTraining {
 		if (!(obj instanceof ApiErrorTraining))
 			return false;
 		ApiErrorTraining other = (ApiErrorTraining) obj;
-		return Objects.equals(errors, other.getErrors()) & Objects.equals(message, other.getMessage())
-				& Objects.equals(path, other.getPath()) & Objects.equals(status, other.getStatus())
-				& Objects.equals(timestamp, other.getTimestamp());
+		return Objects.equals(errors, other.getErrors()) && Objects.equals(message, other.getMessage())
+				&& Objects.equals(path, other.getPath()) && Objects.equals(status, other.getStatus())
+				&& Objects.equals(timestamp, other.getTimestamp());
 	}
 
 }

@@ -41,7 +41,7 @@ public class BeanMappingImpl implements BeanMapping {
 		objects.forEach(obj -> {
 			mappedCollection.add(modelMapper.map(obj, mapToClass));
 		});
-		return new PageImpl<T>(mappedCollection, objects.getPageable(), mappedCollection.size());
+		return new PageImpl<>(mappedCollection, objects.getPageable(), mappedCollection.size());
 	}
 
 	@Override
@@ -50,8 +50,7 @@ public class BeanMappingImpl implements BeanMapping {
 		objects.forEach(obj -> {
 			mappedCollection.add(modelMapper.map(obj, mapToClass));
 		});
-		PageResultResource<T> pageResultDTO = new PageResultResource<T>(mappedCollection, createPagination(objects));
-		return pageResultDTO;
+		return new PageResultResource<>(mappedCollection, createPagination(objects));
 	}
 
 	@Override

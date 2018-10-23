@@ -36,6 +36,7 @@ public class Relationship implements Serializable {
 	private Person person2;
 
 	public Relationship() {
+		// hibernate requires non-args constructor
 	}
 
 	public Long getIdRelationship() {

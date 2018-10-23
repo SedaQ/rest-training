@@ -32,6 +32,7 @@ public class RelationshipType implements Serializable {
 	private Set<Relationship> relationships = new HashSet<>();
 
 	public RelationshipType() {
+		// hibernate requires non-args constructor
 	}
 
 	public Long getIdRelationshipType() {
