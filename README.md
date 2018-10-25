@@ -30,6 +30,10 @@ e.g. on localhost it should be:
 http://localhost:8080/rest-training/api/v1/swagger-ui.html
 ```
 
+ADOC version of REST API documentation is generated here: (https://github.com/SedaQ/rest-training/blob/master/doc-files/ApiDocumentation.adoc)
+
+PDF version of REST API documentation is generated here: (https://github.com/SedaQ/rest-training/blob/master/doc-files/ApiDocumentation.pdf)
+
 NOTE: please note that client for that REST API could be generated using [Swagger codegen] (https://swagger.io/tools/swagger-codegen/). It is crucial to annotate each RestController method properly!
 
 ### 2. Properties file
