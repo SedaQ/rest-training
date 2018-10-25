@@ -1,5 +1,5 @@
 # Course: Server side implementation of REST architecture
-This project shows implementation of REST architecture using Spring Boot and JPA.
+This project shows the implementation of REST architecture using Spring Boot and Spring Data JPA with QueryDSL. For mapping Entities to Dtos is used the ModelMapper framework (If performance matters consider MapStruct framework). Documentation for that REST API is implemented in the Swagger framework.
 
 ## Authors
 
