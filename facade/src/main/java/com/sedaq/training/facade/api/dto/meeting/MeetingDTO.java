@@ -5,18 +5,27 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 
  * @author Pavel Šeda
  *
  */
 @JacksonXmlRootElement(localName = "meeting")
+@ApiModel(value = "MeetingDTO", description = "Information about meeting.")
 public class MeetingDTO {
 
+	@ApiModelProperty(value = "Meeting ID.")
 	private Long idMeeting;
+	@ApiModelProperty(value = "Meeting start time.")
 	private LocalDateTime startTime;
+	@ApiModelProperty(value = "Meeting duration.")
 	private Duration duration;
+	@ApiModelProperty(value = "Meeting place.")
 	private String place;
+	@ApiModelProperty(value = "Meeting note.")
 	private String note;
 
 	public MeetingDTO() {

@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 
  * @author Pavel Seda
@@ -22,16 +25,24 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
  */
 @JacksonXmlRootElement(localName = "person")
 @XmlRootElement(name = "person")
+@ApiModel(value = "PersonDTO", description = "Information about person.")
 public class PersonDTO {
 
+	@ApiModelProperty(value = "Person ID.")
 	private Long idPerson;
+	@ApiModelProperty(value = "Person email.")
 	private String email;
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private char[] pwd;
+	@ApiModelProperty(value = "Person nickname.")
 	private String nickname;
+	@ApiModelProperty(value = "Person first name.")
 	private String firstName;
+	@ApiModelProperty(value = "Person surname.")
 	private String surname;
+	@ApiModelProperty(value = "Person birthday.")
 	private LocalDate birthday;
+	@ApiModelProperty(value = "Person age.")
 	private Integer age;
 
 	public PersonDTO() {

@@ -9,22 +9,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.sedaq.training.facade.validation.annotations.ValidEmail;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 
  * @author Pavel Šeda
  *
  */
+@ApiModel(value = "PersonCreateDTO", description = "Persons object to create in the database.")
 public class PersonCreateDTO {
 
+	@ApiModelProperty(value = "Person email.")
 	@ValidEmail(message = "{personcreate.email.ValidEmail.message}")
 	private String email;
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private char[] pwd;
+	@ApiModelProperty(value = "Person nickname.")
 	private String nickname;
+	@ApiModelProperty(value = "Person first name.")
 	private String firstName;
+	@ApiModelProperty(value = "Person surname.")
 	private String surname;
+	@ApiModelProperty(value = "Person birthday.")
 	@Past(message = "{personcreate.birthday.Past.message}")
 	private LocalDate birthday;
+	@ApiModelProperty(value = "Person age.")
 	private Integer age;
 
 	public PersonCreateDTO() {

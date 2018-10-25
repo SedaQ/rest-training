@@ -32,8 +32,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Authorization;
-import io.swagger.annotations.AuthorizationScope;
 
 /**
  * @author Pavel Šeda
@@ -62,13 +60,15 @@ public class MeetingRestController {
 	 * @return Requested Meeting by id.
 	 */
 	// @formatter:off
-	@ApiOperation(httpMethod = "GET", value = "Get Meeting by Id.", response = MeetingDTO.class, nickname = "findUserById", produces = "application/json or application/xml", authorizations = {
-			@Authorization(value = "sampleoauth", scopes = {
-					@AuthorizationScope(scope = "find Meeting by ID", description = "allows returning Meeting by ID.") }) })
+	@ApiOperation(httpMethod = "GET", value = "Get Meeting by Id.", response = MeetingDTO.class, nickname = "findUserById", produces = "application/json or application/xml")
+
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> findMeetingById(@ApiParam(name = "Meeting Id") @PathVariable Long id,
-			@ApiParam(value = "Fields which should be returned in REST API response", required = false) @RequestParam(value = "fields", required = false) String fields,
+	public ResponseEntity<Object> findMeetingById(
+			@ApiParam(name = "Meeting Id")
+			@PathVariable Long id,
+			@ApiParam(value = "Fields which should be returned in REST API response", required = false)
+			@RequestParam(value = "fields", required = false) String fields,
 			@RequestHeader HttpHeaders headers) {
 		try {
 			MeetingDTO meetingResource = meetingFacade.findById(id);
@@ -90,14 +90,16 @@ public class MeetingRestController {
 	 * @return all Meetings.
 	 */
 	// @formatter:off
-	@ApiOperation(httpMethod = "GET", value = "Get All Meetings.", response = MeetingDTO.class, responseContainer = "Page", nickname = "findAllMeetings", produces = "application/json or application/xml", authorizations = {
-			@Authorization(value = "sampleoauth", scopes = {
-					@AuthorizationScope(scope = "find all Meetings", description = "allows returning Meetings.") }) })
+	@ApiOperation(httpMethod = "GET", value = "Get All Meetings.", response = MeetingDTO.class, responseContainer = "Page", nickname = "findAllMeetings", produces = "application/json or application/xml")
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> findAllMeetings(@QuerydslPredicate(root = Meeting.class) Predicate predicate,
-			Pageable pageable, @RequestParam MultiValueMap<String, String> parameters,
-			@ApiParam(value = "Fields which should be returned in REST API response", required = false) @RequestParam(value = "fields", required = false) String fields,
+	public ResponseEntity<Object> findAllMeetings(
+			@QuerydslPredicate(root = Meeting.class) Predicate predicate,
+			Pageable pageable, 
+			@ApiParam(value = "Parameters for QueryDSL filtering", required = false)
+			@RequestParam MultiValueMap<String, String> parameters,
+			@ApiParam(value = "Fields which should be returned in REST API response", required = false)
+			@RequestParam(value = "fields", required = false) String fields,
 			@RequestHeader HttpHeaders headers) {
 		try {
 			PageResultResource<MeetingDTO> meetingResource = meetingFacade.findAll(predicate, pageable);

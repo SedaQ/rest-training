@@ -12,25 +12,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sedaq.training.facade.config.FacadeConfig;
+import com.sedaq.training.rest.security.RestSecurityConfiguration;
 
 /**
  * <p>
  * To run with external property file add following to:
- *
- * Eclipse example:
- *
- * <pre>
- * <code>
- *  Run Configuration -> tab: Arguments -> Program arguments
- * </code>
- * </pre>
- * </p>
- *
- * <pre>
- * <code>
- *  --path.to.config.file="/etc/training/training.properties"
- * </code>
- * </pre>
  *
  * Intellij idea example:
  *
@@ -43,17 +29,16 @@ import com.sedaq.training.facade.config.FacadeConfig;
  *
  * <pre>
  *  <code>
- *   --path.to.config.file="/etc/training/training.properties"
+ *   --path.to.config.file=../ansible/properties/training.properties
  *  </code>
  * </pre>
  *
  * @author Pavel Seda
  *
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.sedaq.training.rest")
 @EnableSpringDataWebSupport
-@Import({ FacadeConfig.class })
-@ComponentScan("com.sedaq.training.rest")
+@Import({ FacadeConfig.class, RestSecurityConfiguration.class})
 @PropertySource("file:${path.to.config.file}")
 public class RestConfigTraining extends SpringBootServletInitializer {
 

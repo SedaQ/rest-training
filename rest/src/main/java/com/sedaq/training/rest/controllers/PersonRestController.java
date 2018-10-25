@@ -62,8 +62,11 @@ public class PersonRestController {
 	@ApiOperation(httpMethod = "GET", value = "Get Person by Id.", response = PersonDTO.class, nickname = "findPersonById", produces = "application/json or application/xml")
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> findPersonById(@ApiParam(name = "Person Id") @PathVariable Long id,
-			@ApiParam(value = "Fields which should be returned in REST API response", required = false) @RequestParam(value = "fields", required = false) String fields,
+	public ResponseEntity<Object> findPersonById(
+			@ApiParam(name = "Person Id") 
+			@PathVariable Long id,
+			@ApiParam(value = "Fields which should be returned in REST API response", required = false) 
+			@RequestParam(value = "fields", required = false) String fields,
 			@RequestHeader HttpHeaders headers) {
 		try {
 			PersonDTO userResource = personFacade.findById(id);
@@ -88,9 +91,13 @@ public class PersonRestController {
 	@ApiOperation(httpMethod = "GET", value = "Get All Persons.", response = PersonDTO.class, responseContainer = "Page", nickname = "findAllPersons", produces = "application/json or application/xml")
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> findAllPersons(@QuerydslPredicate(root = Person.class) Predicate predicate,
-			Pageable pageable, @RequestParam MultiValueMap<String, String> parameters,
-			@ApiParam(value = "Fields which should be returned in REST API response", required = false) @RequestParam(value = "fields", required = false) String fields,
+	public ResponseEntity<Object> findAllPersons(
+			@QuerydslPredicate(root = Person.class) Predicate predicate,
+			Pageable pageable, 
+			@ApiParam(value = "Parameters for QueryDSL filtering", required = false)
+			@RequestParam MultiValueMap<String, String> parameters,
+			@ApiParam(value = "Fields which should be returned in REST API response", required = false) 
+			@RequestParam(value = "fields", required = false) String fields,
 			@RequestHeader HttpHeaders headers) {
 		try {
 			PageResultResource<PersonDTO> userResource = personFacade.findAll(predicate, pageable);
