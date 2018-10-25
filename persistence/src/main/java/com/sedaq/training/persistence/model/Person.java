@@ -8,12 +8,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,8 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
-
-import com.sedaq.training.persistence.model.enums.Role;
 
 /**
  * 
@@ -56,14 +50,9 @@ public class Person implements Serializable {
 	private LocalDate birthday;
 	@Column(nullable = true)
 	private Integer age;
-	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-	@CollectionTable(name = "person_role", joinColumns = @JoinColumn(name = "id_person"))
-	@Column(name = "role", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Set<Role> roles = new HashSet<>();
 	@ManyToMany(fetch = FetchType.LAZY, targetEntity = Meeting.class, mappedBy = "persons")
 	private Set<Meeting> meetings = new HashSet<>();
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_address")
 	private Address address;
 	@OneToMany(targetEntity = Contact.class, mappedBy = "person")
@@ -153,18 +142,6 @@ public class Person implements Serializable {
 		this.meetings.add(meeting);
 	}
 
-	public Set<Role> getRoles() {
-		return Collections.unmodifiableSet(roles);
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = new HashSet<>(roles);
-	}
-
-	public void addRole(Role role) {
-		this.roles.add(role);
-	}
-
 	public Address getAddress() {
 		return address;
 	}
@@ -239,8 +216,6 @@ public class Person implements Serializable {
 		builder.append(age);
 		builder.append(", meetings=");
 		builder.append(meetings);
-		builder.append(", roles=");
-		builder.append(roles);
 		builder.append(", address=");
 		builder.append(address);
 		builder.append(", contacts=");
