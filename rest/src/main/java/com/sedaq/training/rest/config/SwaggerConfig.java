@@ -35,7 +35,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
             .title("REST API documentation")
             .description("Developed By Pavel Seda")
-            .termsOfServiceUrl("Licensed by Pavel Seda")
+            .termsOfServiceUrl("Licensed by MIT")
             .build();
 	}
 

@@ -61,7 +61,7 @@ public class PersonRestController {
 	// @formatter:off
 	@ApiOperation(httpMethod = "GET", value = "Get Person by Id.", response = PersonDTO.class, nickname = "findPersonById", produces = "application/json or application/xml")
 	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
-	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@GetMapping(path = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> findPersonById(
 			@ApiParam(name = "Person Id") 
 			@PathVariable Long id,

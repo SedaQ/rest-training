@@ -1,6 +1,7 @@
 package com.sedaq.training.rest.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
@@ -35,84 +36,76 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author Pavel Šeda
- *
  */
-//@formatter:off
 @Api(value = "/meetings", consumes = "application/json or application/xml")
-//@formatter:on
 @RestController
 @RequestMapping(value = "/meetings")
 public class MeetingRestController {
 
-	private MeetingFacade meetingFacade;
-	private ObjectMapper objectMapper;
+    private MeetingFacade meetingFacade;
+    private ObjectMapper objectMapper;
 
-	@Autowired
-	public MeetingRestController(MeetingFacade meetingFacade, ObjectMapper objectMapper) {
-		this.meetingFacade = meetingFacade;
-		this.objectMapper = objectMapper;
-	}
+    @Autowired
+    public MeetingRestController(MeetingFacade meetingFacade, @Qualifier("objMapperRESTApi") ObjectMapper objectMapper) {
+        this.meetingFacade = meetingFacade;
+        this.objectMapper = objectMapper;
+    }
 
-	/**
-	 * Get requested Meeting by id.
-	 * 
-	 * @param id of Meeting to return.
-	 * @return Requested Meeting by id.
-	 */
-	// @formatter:off
-	@ApiOperation(httpMethod = "GET", value = "Get Meeting by Id.", response = MeetingDTO.class, nickname = "findUserById", produces = "application/json or application/xml")
+    /**
+     * Get requested Meeting by id.
+     *
+     * @param id of Meeting to return.
+     * @return Requested Meeting by id.
+     */
+    @ApiOperation(httpMethod = "GET", value = "Get Meeting by Id.", response = MeetingDTO.class, nickname = "findUserById", produces = "application/json or application/xml")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = "The requested resource was not found.")})
+    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<Object> findMeetingById(
+            @ApiParam(name = "Meeting Id")
+            @PathVariable Long id,
+            @ApiParam(value = "Fields which should be returned in REST API response", required = false)
+            @RequestParam(value = "fields", required = false) String fields,
+            @RequestHeader HttpHeaders headers) {
+        try {
+            MeetingDTO meetingResource = meetingFacade.findById(id);
+            if (HttpHeadersAcceptAndContentType.isJson(headers)) {
+                Squiggly.init(objectMapper, fields);
+                return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, meetingResource), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(meetingResource, HttpStatus.OK);
+            }
+        } catch (FacadeLayerException ex) {
+            throw new ResourceNotFoundException(ex);
+        }
+    }
 
-	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
-	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> findMeetingById(
-			@ApiParam(name = "Meeting Id")
-			@PathVariable Long id,
-			@ApiParam(value = "Fields which should be returned in REST API response", required = false)
-			@RequestParam(value = "fields", required = false) String fields,
-			@RequestHeader HttpHeaders headers) {
-		try {
-			MeetingDTO meetingResource = meetingFacade.findById(id);
-			if (HttpHeadersAcceptAndContentType.isJson(headers)) {
-				Squiggly.init(objectMapper, fields);
-				return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, meetingResource), HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(meetingResource, HttpStatus.OK);
-			}
-		} catch (FacadeLayerException ex) {
-			throw new ResourceNotFoundException(ex);
-		}
-	}
-	// @formatter:on
-
-	/**
-	 * Get all Meetings.
-	 * 
-	 * @return all Meetings.
-	 */
-	// @formatter:off
-	@ApiOperation(httpMethod = "GET", value = "Get All Meetings.", response = MeetingDTO.class, responseContainer = "Page", nickname = "findAllMeetings", produces = "application/json or application/xml")
-	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
-	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> findAllMeetings(
-			@QuerydslPredicate(root = Meeting.class) Predicate predicate,
-			Pageable pageable, 
-			@ApiParam(value = "Parameters for QueryDSL filtering", required = false)
-			@RequestParam MultiValueMap<String, String> parameters,
-			@ApiParam(value = "Fields which should be returned in REST API response", required = false)
-			@RequestParam(value = "fields", required = false) String fields,
-			@RequestHeader HttpHeaders headers) {
-		try {
-			PageResultResource<MeetingDTO> meetingResource = meetingFacade.findAll(predicate, pageable);
-			if (HttpHeadersAcceptAndContentType.isJson(headers)) {
-				Squiggly.init(objectMapper, fields);
-				return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, meetingResource), HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(meetingResource, HttpStatus.OK);
-			}
-		} catch (FacadeLayerException ex) {
-			throw new ResourceNotFoundException(ex);
-		}
-	}
-	// @formatter:on
+    /**
+     * Get all Meetings.
+     *
+     * @return all Meetings.
+     */
+    @ApiOperation(httpMethod = "GET", value = "Get All Meetings.", response = MeetingDTO.class, responseContainer = "Page", nickname = "findAllMeetings", produces = "application/json or application/xml")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = "The requested resource was not found.")})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<Object> findAllMeetings(
+            @QuerydslPredicate(root = Meeting.class) Predicate predicate,
+            Pageable pageable,
+            @ApiParam(value = "Parameters for QueryDSL filtering", required = false)
+            @RequestParam MultiValueMap<String, String> parameters,
+            @ApiParam(value = "Fields which should be returned in REST API response", required = false)
+            @RequestParam(value = "fields", required = false) String fields,
+            @RequestHeader HttpHeaders headers) {
+        try {
+            PageResultResource<MeetingDTO> meetingResource = meetingFacade.findAll(predicate, pageable);
+            if (HttpHeadersAcceptAndContentType.isJson(headers)) {
+                Squiggly.init(objectMapper, fields);
+                return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, meetingResource), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(meetingResource, HttpStatus.OK);
+            }
+        } catch (FacadeLayerException ex) {
+            throw new ResourceNotFoundException(ex);
+        }
+    }
 
 }

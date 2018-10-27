@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sedaq.training.facade.config.FacadeConfig;
 import com.sedaq.training.rest.security.RestSecurityConfiguration;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
