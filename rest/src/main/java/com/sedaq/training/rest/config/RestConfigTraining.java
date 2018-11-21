@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 /**
  * <p>
  * To run with external property file add following to:
- *
+ * <p>
  * Intellij idea example:
  *
  * <pre>
@@ -35,48 +35,47 @@ import org.springframework.stereotype.Component;
  * </pre>
  *
  * @author Pavel Seda
- *
  */
 @SpringBootApplication(scanBasePackages = "com.sedaq.training.rest")
 @EnableSpringDataWebSupport
-@Import({ FacadeConfig.class, RestSecurityConfiguration.class})
+@Import({FacadeConfig.class, RestSecurityConfiguration.class})
 @PropertySource("file:${path.to.config.file}")
 public class RestConfigTraining extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(RestConfigTraining.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(RestConfigTraining.class);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(RestConfigTraining.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RestConfigTraining.class, args);
+    }
 
-	@Bean
-	@Primary
-	public MappingJackson2HttpMessageConverter jacksonHTTPMessageConverter() {
-		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-		jsonConverter.setObjectMapper(objectMapperForRestAPI());
-		return jsonConverter;
-	}
+    @Bean
+    @Primary
+    public MappingJackson2HttpMessageConverter jacksonHTTPMessageConverter() {
+        MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+        jsonConverter.setObjectMapper(objectMapperForRestAPI());
+        return jsonConverter;
+    }
 
-	@Bean(name = "objMapperRESTApi")
-	@Primary
-	public ObjectMapper objectMapperForRestAPI() {
-		ObjectMapper obj = new ObjectMapper();
-		obj.registerModule(new JavaTimeModule());
-		obj.setPropertyNamingStrategy(snakeCase());
-		return obj;
-	}
+    @Bean(name = "objMapperRESTApi")
+    @Primary
+    public ObjectMapper objectMapperForRestAPI() {
+        ObjectMapper obj = new ObjectMapper();
+        obj.registerModule(new JavaTimeModule());
+        obj.setPropertyNamingStrategy(snakeCase());
+        return obj;
+    }
 
-	/**
-	 * Naming strategy for returned JSONs.
-	 *
-	 * @return Naming Strategy for JSON properties
-	 */
-	@Bean(name = "properyNamingSnakeCase")
-	public PropertyNamingStrategy snakeCase() {
-		return PropertyNamingStrategy.SNAKE_CASE;
-	}
+    /**
+     * Naming strategy for returned JSONs.
+     *
+     * @return Naming Strategy for JSON properties
+     */
+    @Bean(name = "properyNamingSnakeCase")
+    public PropertyNamingStrategy snakeCase() {
+        return PropertyNamingStrategy.SNAKE_CASE;
+    }
 
 }

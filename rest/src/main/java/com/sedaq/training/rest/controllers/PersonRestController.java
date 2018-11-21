@@ -1,5 +1,10 @@
 package com.sedaq.training.rest.controllers;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sedaq.training.facade.api.dto.meeting.MeetingDTO;
+import com.sedaq.training.rest.utils.annotations.ApiPageableSwagger;
+import io.swagger.annotations.*;
+import org.jsondoc.core.annotation.ApiObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
@@ -28,89 +33,93 @@ import com.sedaq.training.persistence.model.Person;
 import com.sedaq.training.rest.exceptions.ResourceNotFoundException;
 import com.sedaq.training.rest.utils.HttpHeadersAcceptAndContentType;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import java.util.List;
 
 /**
  * @author Pavel Šeda
- *
  */
 @Api(value = "/persons", consumes = "application/json or application/xml")
 @RestController
 @RequestMapping(value = "/persons")
 public class PersonRestController {
 
-	private PersonFacade personFacade;
-	private ObjectMapper objectMapper;
+    private PersonFacade personFacade;
+    private ObjectMapper objectMapper;
 
-	@Autowired
-	public PersonRestController(PersonFacade personFacade, @Qualifier("objMapperRESTApi") ObjectMapper objectMapper) {
-		this.personFacade = personFacade;
-		this.objectMapper = objectMapper;
-	}
+    @Autowired
+    public PersonRestController(PersonFacade personFacade, @Qualifier("objMapperRESTApi") ObjectMapper objectMapper) {
+        this.personFacade = personFacade;
+        this.objectMapper = objectMapper;
+    }
 
-	/**
-	 * Get requested Person by id.
-	 * 
-	 * @param id of Person to return.
-	 * @return Requested Person by id.
-	 */
-	// @formatter:off
-	@ApiOperation(httpMethod = "GET", value = "Get Person by Id.", response = PersonDTO.class, nickname = "findPersonById", produces = "application/json or application/xml")
-	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
-	@GetMapping(path = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> findPersonById(
-			@ApiParam(name = "Person Id") 
-			@PathVariable Long id,
-			@ApiParam(value = "Fields which should be returned in REST API response", required = false) 
-			@RequestParam(value = "fields", required = false) String fields,
-			@RequestHeader HttpHeaders headers) {
-		try {
-			PersonDTO userResource = personFacade.findById(id);
-			if (HttpHeadersAcceptAndContentType.isJson(headers)) {
-				Squiggly.init(objectMapper, fields);
-				return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, userResource), HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(userResource, HttpStatus.OK);
-			}
-		} catch (FacadeLayerException ex) {
-			throw new ResourceNotFoundException(ex);
-		}
-	}
-	// @formatter:on
+    /**
+     * Get requested Person by id.
+     *
+     * @param id of Person to return.
+     * @return Requested Person by id.
+     */
+    @ApiOperation(httpMethod = "GET", value = "Get Person by Id.", response = PersonDTO.class, nickname = "findPersonById", produces = "application/json or application/xml")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = "The requested resource was not found.")})
+    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<Object> findPersonById(
+            @ApiParam(name = "Person Id")
+            @PathVariable Long id,
+            @ApiParam(value = "Fields which should be returned in REST API response", required = false)
+            @RequestParam(value = "fields", required = false) String fields,
+            @RequestHeader HttpHeaders headers) {
+        try {
+            PersonDTO userResource = personFacade.findById(id);
+            if (HttpHeadersAcceptAndContentType.isJson(headers)) {
+                Squiggly.init(objectMapper, fields);
+                return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, userResource), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(userResource, HttpStatus.OK);
+            }
+        } catch (FacadeLayerException ex) {
+            throw new ResourceNotFoundException(ex);
+        }
+    }
 
-	/**
-	 * Get all Persons.
-	 * 
-	 * @return all Persons.
-	 */
-	// @formatter:off
-	@ApiOperation(httpMethod = "GET", value = "Get All Persons.", response = PersonDTO.class, responseContainer = "Page", nickname = "findAllPersons", produces = "application/json or application/xml")
-	@ApiResponses(value = { @ApiResponse(code = 404, message = "The requested resource was not found.") })
-	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Object> findAllPersons(
-			@QuerydslPredicate(root = Person.class) Predicate predicate,
-			Pageable pageable, 
-			@ApiParam(value = "Parameters for QueryDSL filtering", required = false)
-			@RequestParam MultiValueMap<String, String> parameters,
-			@ApiParam(value = "Fields which should be returned in REST API response", required = false) 
-			@RequestParam(value = "fields", required = false) String fields,
-			@RequestHeader HttpHeaders headers) {
-		try {
-			PageResultResource<PersonDTO> userResource = personFacade.findAll(predicate, pageable);
-			if (HttpHeadersAcceptAndContentType.isJson(headers)) {
-				Squiggly.init(objectMapper, fields);
-				return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, userResource), HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(userResource, HttpStatus.OK);
-			}
-		} catch (FacadeLayerException ex) {
-			throw new ResourceNotFoundException(ex);
-		}
-	}
-	// @formatter:on
+    /**
+     * Get all Persons.
+     *
+     * @return all Persons.
+     */
+    @ApiOperation(httpMethod = "GET", value = "Get all persons.", response = PersonRestResource.class, responseContainer = "Page", nickname = "findAllPersons", produces = "application/json or application/xml")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = "The requested resource was not found.")})
+    @ApiPageableSwagger
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<Object> findAllPersons(
+            @QuerydslPredicate(root = Person.class) Predicate predicate,
+            Pageable pageable,
+            @ApiParam(value = "Parameters for QueryDSL filtering", required = false)
+            @RequestParam MultiValueMap<String, String> parameters,
+            @ApiParam(value = "Fields which should be returned in REST API response", required = false)
+            @RequestParam(value = "fields", required = false) String fields,
+            @RequestHeader HttpHeaders headers) {
+        try {
+            PageResultResource<PersonDTO> userResource = personFacade.findAll(predicate, pageable);
+            if (HttpHeadersAcceptAndContentType.isJson(headers)) {
+                Squiggly.init(objectMapper, fields);
+                return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, userResource), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(userResource, HttpStatus.OK);
+            }
+        } catch (FacadeLayerException ex) {
+            throw new ResourceNotFoundException(ex);
+        }
+    }
+
+    @ApiObject(name = "Result info (Page)",
+            description = "Content (Retrieved data) and meta information about REST API result page. Including page number, number of elements in page, size of elements, total number of elements and total number of pages")
+    private static class PersonRestResource extends PageResultResource<PersonDTO> {
+        @JsonProperty(required = true)
+        @ApiModelProperty(value = "Retrieved persons from databases.")
+        private List<PersonDTO> content;
+        @JsonProperty(required = true)
+        @ApiModelProperty(value = "Pagination including: page number, number of elements in page, size, total elements and total pages.")
+        private Pagination pagination;
+    }
+
 
 }

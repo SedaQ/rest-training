@@ -9,22 +9,20 @@ import com.querydsl.core.types.Predicate;
 import com.sedaq.training.persistence.model.Person;
 
 /**
- * 
  * @author Pavel Šeda
- *
  */
 public interface PersonService {
 
-	Optional<Person> findById(Long id);
+    Optional<Person> findById(Long id);
 
-	Page<Person> findAll(Predicate predicate, Pageable pageable);
+    Page<Person> findAll(Predicate predicate, Pageable pageable);
 
-	void create(Person person);
+    void create(Person person);
 
-	void update(Person person);
+    void update(Person person);
 
-	void delete(Person delete);
+    void delete(Person delete);
 
-	void delete(Long id);
+    void delete(Long id);
 
 }

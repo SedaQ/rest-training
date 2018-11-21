@@ -1,5 +1,9 @@
 package com.sedaq.training.rest.controllers;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sedaq.training.rest.utils.annotations.ApiPageableSwagger;
+import io.swagger.annotations.*;
+import org.jsondoc.core.annotation.ApiObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
@@ -28,11 +32,7 @@ import com.sedaq.training.persistence.model.Meeting;
 import com.sedaq.training.rest.exceptions.ResourceNotFoundException;
 import com.sedaq.training.rest.utils.HttpHeadersAcceptAndContentType;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import java.util.List;
 
 /**
  * @author Pavel Šeda
@@ -57,7 +57,7 @@ public class MeetingRestController {
      * @param id of Meeting to return.
      * @return Requested Meeting by id.
      */
-    @ApiOperation(httpMethod = "GET", value = "Get Meeting by Id.", response = MeetingDTO.class, nickname = "findUserById", produces = "application/json or application/xml")
+    @ApiOperation(httpMethod = "GET", value = "Get Meeting by Id.", response = MeetingDTO.class, nickname = "findMeetingById", produces = "application/json or application/xml")
     @ApiResponses(value = {@ApiResponse(code = 404, message = "The requested resource was not found.")})
     @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Object> findMeetingById(
@@ -84,8 +84,9 @@ public class MeetingRestController {
      *
      * @return all Meetings.
      */
-    @ApiOperation(httpMethod = "GET", value = "Get All Meetings.", response = MeetingDTO.class, responseContainer = "Page", nickname = "findAllMeetings", produces = "application/json or application/xml")
+    @ApiOperation(httpMethod = "GET", value = "Get All Meetings.", response = MeetingRestResource.class, responseContainer = "Page", nickname = "findAllMeetings", produces = "application/json or application/xml")
     @ApiResponses(value = {@ApiResponse(code = 404, message = "The requested resource was not found.")})
+    @ApiPageableSwagger
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Object> findAllMeetings(
             @QuerydslPredicate(root = Meeting.class) Predicate predicate,
@@ -107,5 +108,17 @@ public class MeetingRestController {
             throw new ResourceNotFoundException(ex);
         }
     }
+
+    @ApiObject(name = "Result info (Page)",
+            description = "Content (Retrieved data) and meta information about REST API result page. Including page number, number of elements in page, size of elements, total number of elements and total number of pages")
+    private static class MeetingRestResource extends PageResultResource<MeetingDTO> {
+        @JsonProperty(required = true)
+        @ApiModelProperty(value = "Retrieved meetings from databases.")
+        private List<MeetingDTO> content;
+        @JsonProperty(required = true)
+        @ApiModelProperty(value = "Pagination including: page number, number of elements in page, size, total elements and total pages.")
+        private Pagination pagination;
+    }
+
 
 }

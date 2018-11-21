@@ -98,7 +98,11 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-spring-web</artifactId>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

@@ -17,23 +17,23 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@Import({ ServiceConfig.class, ValidationMessagesConfig.class })
-@ComponentScan(basePackages = { "com.sedaq.training.facade.iface", "com.sedaq.training.facade.impl",
-		"com.sedaq.training.facade.mapping" })
+@Import({ServiceConfig.class, ValidationMessagesConfig.class})
+@ComponentScan(basePackages = {"com.sedaq.training.facade.iface", "com.sedaq.training.facade.impl",
+        "com.sedaq.training.facade.mapping"})
 public class FacadeConfig {
 
-	private static final Logger LOG = LoggerFactory.getLogger(FacadeConfig.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FacadeConfig.class);
 
-	@Bean
-	public ModelMapper modelMapper() {
-		LOG.debug("modelMapper()");
-		return new ModelMapper();
-	}
+    @Bean
+    public ModelMapper modelMapper() {
+        LOG.debug("modelMapper()");
+        return new ModelMapper();
+    }
 
-	@Bean
-	public EmailValidator usernameValidator() {
-		LOG.debug("usernameValidator()");
-		return new EmailValidator();
-	}
+    @Bean
+    public EmailValidator usernameValidator() {
+        LOG.debug("usernameValidator()");
+        return new EmailValidator();
+    }
 
 }

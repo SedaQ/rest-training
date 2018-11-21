@@ -7,15 +7,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * 
  * @author Pavel Šeda
- *
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = { "com.sedaq.training.persistence" })
-@EntityScan(basePackages = { "com.sedaq.training.persistence.model" })
-@EnableJpaRepositories(basePackages = { "com.sedaq.training.persistence.repository" })
+@ComponentScan(basePackages = {"com.sedaq.training.persistence"})
+@EntityScan(basePackages = {"com.sedaq.training.persistence.model"})
+@EnableJpaRepositories(basePackages = {"com.sedaq.training.persistence.repository"})
 public class PersistenceConfig {
 
 }
