@@ -108,6 +108,12 @@ In Intellij Idea:
 3. Add into "**Program arguments**" --path.to.config.file="{path to your config properties}".
 4. Run RestConfigTraining
 
+Runnig project from cmd (after project is installed and database is migrated):
+###
+```
+mvn spring-boot:run -Dpath.to.config.file=../ansible/properties/training.properties
+```
+
 ## Used Technologies
 The project was built and tested with these technologies, so if you have any unexpected troubles let us know.
 

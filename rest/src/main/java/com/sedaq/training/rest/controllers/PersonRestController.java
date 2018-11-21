@@ -47,7 +47,7 @@ public class PersonRestController {
     private ObjectMapper objectMapper;
 
     @Autowired
-    public PersonRestController(PersonFacade personFacade, @Qualifier("objMapperRESTApi") ObjectMapper objectMapper) {
+    public PersonRestController(PersonFacade personFacade, ObjectMapper objectMapper) {
         this.personFacade = personFacade;
         this.objectMapper = objectMapper;
     }

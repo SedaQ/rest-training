@@ -46,7 +46,7 @@ public class MeetingRestController {
     private ObjectMapper objectMapper;
 
     @Autowired
-    public MeetingRestController(MeetingFacade meetingFacade, @Qualifier("objMapperRESTApi") ObjectMapper objectMapper) {
+    public MeetingRestController(MeetingFacade meetingFacade, ObjectMapper objectMapper) {
         this.meetingFacade = meetingFacade;
         this.objectMapper = objectMapper;
     }
