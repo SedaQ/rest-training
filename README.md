@@ -40,7 +40,6 @@ NOTE: please note that client for that REST API could be generated using [Swagge
 ```properties
 
 # Environment DEV or PROD
-### DEV environment does not need kypo2-user-and-group project but assign authority as GUEST by default
 spring.profiles.active=DEV 
 
 
