@@ -72,7 +72,7 @@ logging.file = logs/rest-training.log
 
 # Jackson (e.g. converting Java 8 dates to ISO format
 spring.jackson.serialization.write_dates_as_timestamps=false 
-#spring.jackson.property-naming-strategy=com.fasterxml.jackson.databind.PropertyNamingStrategy.SNAKE_CASE
+spring.jackson.property-naming-strategy=SNAKE_CASE
 
 # to fix: Method jmxMBeanExporter in org.springframework.boot.actuate.autoconfigure.endpoint.jmx.JmxEndpointAutoConfiguration required a single bean, but 2 were found: (objMapperESClient,objectMapperForRestAPI)
 spring.jmx.enabled = false
