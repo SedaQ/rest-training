@@ -20,8 +20,8 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author Pavel Šeda
  */
-@JacksonXmlRootElement(localName = "person")
-@XmlRootElement(name = "person")
+//@JacksonXmlRootElement(localName = "person")
+//@XmlRootElement(name = "person")
 @ApiModel(value = "PersonDTO", description = "Information about person.")
 public class PersonDTO {
 

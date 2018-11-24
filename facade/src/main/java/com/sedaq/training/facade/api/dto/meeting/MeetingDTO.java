@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @author Pavel Šeda
  */
-@JacksonXmlRootElement(localName = "meeting")
+//@JacksonXmlRootElement(localName = "meeting")
 @ApiModel(value = "MeetingDTO", description = "Information about meeting.")
 public class MeetingDTO {
 

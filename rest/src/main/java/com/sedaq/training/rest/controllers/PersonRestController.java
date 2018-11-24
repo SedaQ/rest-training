@@ -65,7 +65,7 @@ public class PersonRestController {
     @ApiResponses(value = {
             @ApiResponse(code = 404, message = "The requested resource was not found.")
     })
-    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Object> findPersonById(
             @ApiParam(name = "Person Id")
             @PathVariable Long id,
@@ -74,12 +74,8 @@ public class PersonRestController {
             @RequestHeader HttpHeaders headers) {
         try {
             PersonDTO userResource = personFacade.findById(id);
-            if (HttpHeadersAcceptAndContentType.isJson(headers)) {
-                Squiggly.init(objectMapper, fields);
-                return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, userResource), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(userResource, HttpStatus.OK);
-            }
+            Squiggly.init(objectMapper, fields);
+            return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, userResource), HttpStatus.OK);
         } catch (FacadeLayerException ex) {
             throw new ResourceNotFoundException(ex);
         }
@@ -101,7 +97,7 @@ public class PersonRestController {
     @ApiResponses(value = {
             @ApiResponse(code = 404, message = "The requested resource was not found.")
     })
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Object> findAllPersons(
             @QuerydslPredicate(root = Person.class) Predicate predicate,
             Pageable pageable,
@@ -112,12 +108,8 @@ public class PersonRestController {
             @RequestHeader HttpHeaders headers) {
         try {
             PageResultResource<PersonDTO> userResource = personFacade.findAll(predicate, pageable);
-            if (HttpHeadersAcceptAndContentType.isJson(headers)) {
-                Squiggly.init(objectMapper, fields);
-                return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, userResource), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(userResource, HttpStatus.OK);
-            }
+            Squiggly.init(objectMapper, fields);
+            return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, userResource), HttpStatus.OK);
         } catch (FacadeLayerException ex) {
             throw new ResourceNotFoundException(ex);
         }

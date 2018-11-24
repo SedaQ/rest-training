@@ -32,12 +32,29 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- REST template -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- BCryptEncoder -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>5.0.9.RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- restTemplate HttpHost -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.5</version>
         </dependency>
     </dependencies>
 </project>

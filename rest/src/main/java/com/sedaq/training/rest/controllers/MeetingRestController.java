@@ -59,7 +59,7 @@ public class MeetingRestController {
      */
     @ApiOperation(httpMethod = "GET", value = "Get Meeting by Id.", response = MeetingDTO.class, nickname = "findMeetingById", produces = "application/json or application/xml")
     @ApiResponses(value = {@ApiResponse(code = 404, message = "The requested resource was not found.")})
-    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Object> findMeetingById(
             @ApiParam(name = "Meeting Id")
             @PathVariable Long id,
@@ -68,12 +68,8 @@ public class MeetingRestController {
             @RequestHeader HttpHeaders headers) {
         try {
             MeetingDTO meetingResource = meetingFacade.findById(id);
-            if (HttpHeadersAcceptAndContentType.isJson(headers)) {
-                Squiggly.init(objectMapper, fields);
-                return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, meetingResource), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(meetingResource, HttpStatus.OK);
-            }
+            Squiggly.init(objectMapper, fields);
+            return new ResponseEntity<>(SquigglyUtils.stringify(objectMapper, meetingResource), HttpStatus.OK);
         } catch (FacadeLayerException ex) {
             throw new ResourceNotFoundException(ex);
         }
@@ -87,7 +83,7 @@ public class MeetingRestController {
     @ApiOperation(httpMethod = "GET", value = "Get All Meetings.", response = MeetingRestResource.class, responseContainer = "Page", nickname = "findAllMeetings", produces = "application/json or application/xml")
     @ApiResponses(value = {@ApiResponse(code = 404, message = "The requested resource was not found.")})
     @ApiPageableSwagger
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Object> findAllMeetings(
             @QuerydslPredicate(root = Meeting.class) Predicate predicate,
             Pageable pageable,
