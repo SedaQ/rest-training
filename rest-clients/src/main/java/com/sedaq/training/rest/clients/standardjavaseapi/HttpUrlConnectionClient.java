@@ -47,8 +47,8 @@ public class HttpUrlConnectionClient {
         personDtoCreate.setNickname("SedaQ");
         personDtoCreate.setSurname("Seda");
 
-        int responseCode = hucc.createPersonDto(encoding, personDtoCreate);
-        System.out.println("ResponseCode: " + responseCode);
+//        int responseCode = hucc.createPersonDto(encoding, personDtoCreate);
+//        System.out.println("ResponseCode: " + responseCode);
     }
 
     public PersonDTO getJsonPersonDTO(String userEncoded, int id) {
