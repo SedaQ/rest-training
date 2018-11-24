@@ -12,31 +12,29 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * 
  * @author Pavel Seda
- *
  */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
-	@Bean
-	public Docket api() {
+    @Bean
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-            .groupName("public-api")
-            .apiInfo(apiInfo()).useDefaultResponseMessages(false)
-            .select()
-            .apis(RequestHandlerSelectors.any())
-            .paths(PathSelectors.any())
-            .build();
-	}
+                .groupName("public-api")
+                .apiInfo(apiInfo()).useDefaultResponseMessages(false)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+    }
 
-	private ApiInfo apiInfo() {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("REST API documentation")
-            .description("Developed By Pavel Seda")
-            .termsOfServiceUrl("Licensed by MIT")
-            .build();
-	}
+                .title("REST API documentation")
+                .description("Developed By Pavel Seda")
+                .termsOfServiceUrl("Licensed by MIT")
+                .build();
+    }
 
 }

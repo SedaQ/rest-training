@@ -7,13 +7,11 @@ import org.springframework.context.annotation.Import;
 import com.sedaq.training.persistence.config.PersistenceConfig;
 
 /**
- * 
  * @author Pavel Šeda
- *
  */
 @Configuration
 @Import(PersistenceConfig.class)
-@ComponentScan(basePackages = { "com.sedaq.training.service.iface", "com.sedaq.training.service.impl" })
+@ComponentScan(basePackages = {"com.sedaq.training.service.iface", "com.sedaq.training.service.impl"})
 public class ServiceConfig {
 
 }

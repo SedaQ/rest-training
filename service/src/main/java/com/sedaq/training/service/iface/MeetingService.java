@@ -9,22 +9,20 @@ import com.querydsl.core.types.Predicate;
 import com.sedaq.training.persistence.model.Meeting;
 
 /**
- * 
  * @author Pavel Šeda
- *
  */
 public interface MeetingService {
 
-	Optional<Meeting> findById(Long id);
+    Optional<Meeting> findById(Long id);
 
-	Page<Meeting> findAll(Predicate predicate, Pageable pageable);
+    Page<Meeting> findAll(Predicate predicate, Pageable pageable);
 
-	void create(Meeting meeting);
+    void create(Meeting meeting);
 
-	void update(Meeting meeting);
+    void update(Meeting meeting);
 
-	void delete(Meeting delete);
+    void delete(Meeting delete);
 
-	void delete(Long id);
+    void delete(Long id);
 
 }

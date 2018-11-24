@@ -15,72 +15,70 @@ import com.sedaq.training.service.exceptions.ServiceLayerException;
 import com.sedaq.training.service.iface.MeetingService;
 
 /**
- * 
  * @author Pavel Šeda
- *
  */
 @Service
 public class MeetingServiceImpl implements MeetingService {
 
-	private MeetingRepository meetingRepository;
+    private MeetingRepository meetingRepository;
 
-	@Autowired
-	public MeetingServiceImpl(MeetingRepository meetingRepository) {
-		this.meetingRepository = meetingRepository;
-	}
+    @Autowired
+    public MeetingServiceImpl(MeetingRepository meetingRepository) {
+        this.meetingRepository = meetingRepository;
+    }
 
-	@Override
-	public Optional<Meeting> findById(Long id) {
-		try {
-			return meetingRepository.findById(id);
-		} catch (HibernateException ex) {
-			throw new ServiceLayerException(ex);
-		}
-	}
+    @Override
+    public Optional<Meeting> findById(Long id) {
+        try {
+            return meetingRepository.findById(id);
+        } catch (HibernateException ex) {
+            throw new ServiceLayerException(ex);
+        }
+    }
 
-	@Override
-	public Page<Meeting> findAll(Predicate predicate, Pageable pageable) {
-		try {
-			return meetingRepository.findAll(predicate, pageable);
-		} catch (HibernateException ex) {
-			throw new ServiceLayerException(ex);
-		}
-	}
+    @Override
+    public Page<Meeting> findAll(Predicate predicate, Pageable pageable) {
+        try {
+            return meetingRepository.findAll(predicate, pageable);
+        } catch (HibernateException ex) {
+            throw new ServiceLayerException(ex);
+        }
+    }
 
-	@Override
-	public void create(Meeting meeting) {
-		try {
-			meetingRepository.save(meeting);
-		} catch (HibernateException ex) {
-			throw new ServiceLayerException(ex);
-		}
-	}
+    @Override
+    public void create(Meeting meeting) {
+        try {
+            meetingRepository.save(meeting);
+        } catch (HibernateException ex) {
+            throw new ServiceLayerException(ex);
+        }
+    }
 
-	@Override
-	public void update(Meeting meeting) {
-		try {
-			meetingRepository.save(meeting);
-		} catch (HibernateException ex) {
-			throw new ServiceLayerException(ex);
-		}
-	}
+    @Override
+    public void update(Meeting meeting) {
+        try {
+            meetingRepository.save(meeting);
+        } catch (HibernateException ex) {
+            throw new ServiceLayerException(ex);
+        }
+    }
 
-	@Override
-	public void delete(Meeting meeting) {
-		try {
-			meetingRepository.delete(meeting);
-		} catch (HibernateException ex) {
-			throw new ServiceLayerException(ex);
-		}
-	}
+    @Override
+    public void delete(Meeting meeting) {
+        try {
+            meetingRepository.delete(meeting);
+        } catch (HibernateException ex) {
+            throw new ServiceLayerException(ex);
+        }
+    }
 
-	@Override
-	public void delete(Long id) {
-		try {
-			meetingRepository.deleteById(id);
-		} catch (HibernateException ex) {
-			throw new ServiceLayerException(ex);
-		}
-	}
+    @Override
+    public void delete(Long id) {
+        try {
+            meetingRepository.deleteById(id);
+        } catch (HibernateException ex) {
+            throw new ServiceLayerException(ex);
+        }
+    }
 
 }

@@ -40,7 +40,6 @@ NOTE: please note that client for that REST API could be generated using [Swagge
 ```properties
 
 # Environment DEV or PROD
-### DEV environment does not need kypo2-user-and-group project but assign authority as GUEST by default
 spring.profiles.active=DEV 
 
 
@@ -108,6 +107,12 @@ In Intellij Idea:
 2. Choose "**RestConfigTraining**" configuration.
 3. Add into "**Program arguments**" --path.to.config.file="{path to your config properties}".
 4. Run RestConfigTraining
+
+Runnig project from cmd (after project is installed and database is migrated):
+###
+```
+mvn spring-boot:run -Dpath.to.config.file=../ansible/properties/training.properties
+```
 
 ## Used Technologies
 The project was built and tested with these technologies, so if you have any unexpected troubles let us know.

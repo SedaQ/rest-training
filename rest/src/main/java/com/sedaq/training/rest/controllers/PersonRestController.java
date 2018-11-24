@@ -2,6 +2,11 @@ package com.sedaq.training.rest.controllers;
 
 import com.sedaq.training.facade.api.dto.person.PersonCreateDTO;
 import com.sedaq.training.rest.exceptions.ResourceNotCreatedException;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sedaq.training.facade.api.dto.meeting.MeetingDTO;
+import com.sedaq.training.rest.utils.annotations.ApiPageableSwagger;
+import io.swagger.annotations.*;
+import org.jsondoc.core.annotation.ApiObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
@@ -24,12 +29,6 @@ import com.sedaq.training.facade.iface.PersonFacade;
 import com.sedaq.training.persistence.model.Person;
 import com.sedaq.training.rest.exceptions.ResourceNotFoundException;
 import com.sedaq.training.rest.utils.HttpHeadersAcceptAndContentType;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 import javax.validation.Valid;
 

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 /**
  * <p>
  * To run with external property file add following to:
- *
+ * <p>
  * Intellij idea example:
  *
  * <pre>
@@ -35,22 +35,21 @@ import org.springframework.stereotype.Component;
  * </pre>
  *
  * @author Pavel Seda
- *
  */
 @SpringBootApplication(scanBasePackages = "com.sedaq.training.rest")
 @EnableSpringDataWebSupport
-@Import({ FacadeConfig.class, RestSecurityConfiguration.class})
+@Import({FacadeConfig.class, RestSecurityConfiguration.class})
 @PropertySource("file:${path.to.config.file}")
 public class RestConfigTraining extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(RestConfigTraining.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(RestConfigTraining.class);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(RestConfigTraining.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RestConfigTraining.class, args);
+    }
 
 //	@Bean
 //	@Primary

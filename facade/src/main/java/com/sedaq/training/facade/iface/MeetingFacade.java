@@ -8,22 +8,20 @@ import com.sedaq.training.facade.api.dto.meeting.MeetingCreateDTO;
 import com.sedaq.training.facade.api.dto.meeting.MeetingDTO;
 
 /**
- * 
  * @author Pavel Šeda
- *
  */
 public interface MeetingFacade {
 
-	MeetingDTO findById(Long id);
+    MeetingDTO findById(Long id);
 
-	PageResultResource<MeetingDTO> findAll(Predicate predicate, Pageable pageable);
+    PageResultResource<MeetingDTO> findAll(Predicate predicate, Pageable pageable);
 
-	MeetingCreateDTO create(MeetingCreateDTO meetingDTO);
+    MeetingCreateDTO create(MeetingCreateDTO meetingDTO);
 
-	MeetingDTO update(MeetingDTO meetingDTO);
+    MeetingDTO update(MeetingDTO meetingDTO);
 
-	void delete(MeetingDTO meetingDTO);
+    void delete(MeetingDTO meetingDTO);
 
-	void delete(Long id);
+    void delete(Long id);
 
 }
