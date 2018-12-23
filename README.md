@@ -55,6 +55,7 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
 spring.jpa.hibernate.ddl-auto=validate
 spring.jpa.show-sql=true
 #spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.open-in-view=false
 
 # spring cloud
 spring.cloud.refresh.enabled = false

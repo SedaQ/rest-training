@@ -91,6 +91,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- BCryptEncoder -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring-security-core}</version>
+            </dependency>
             <!-- necessary for OpenJDK 11 for JAXB modules (used by many frameworks internally -->
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
@@ -123,12 +129,6 @@
                 <groupId>org.glassfish.jersey.media</groupId>
                 <artifactId>jersey-media-json-jackson</artifactId>
                 <version>${jersey-media-json-jackson.version}</version>
-            </dependency>
-            <!-- BCryptEncoder -->
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-core</artifactId>
-                <version>${spring-security-core}</version>
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
@@ -223,5 +223,6 @@
         <module>facade</module>
         <module>rest</module>
         <module>rest-clients</module>
+        <module>security</module>
     </modules>
 </project>

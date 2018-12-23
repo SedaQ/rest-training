@@ -12,6 +12,10 @@
     <artifactId>rest-clients</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
         <!-- jersey client -->
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>

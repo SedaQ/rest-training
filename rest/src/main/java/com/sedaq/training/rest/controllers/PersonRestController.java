@@ -97,6 +97,7 @@ public class PersonRestController {
     @ApiResponses(value = {
             @ApiResponse(code = 404, message = "The requested resource was not found.")
     })
+    @ApiPageableSwagger
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Object> findAllPersons(
             @QuerydslPredicate(root = Person.class) Predicate predicate,
