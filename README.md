@@ -42,11 +42,9 @@ NOTE: please note that client for that REST API could be generated using [Swagge
 # Environment DEV or PROD
 spring.profiles.active=DEV 
 
-
-server.port={port for service}
-server.servlet.context-path=/{context path for service}
-
-# you can add more scopes according to settings from step 1.
+server.address={server address}, e.g., localhost (127.0.0.1)
+server.port={port for service}, e.g., 8080
+server.servlet.context-path=/{context path for service}, e.g., /rest-training/api/v1
 
 # DATASOURCE
 spring.datasource.url=jdbc:postgresql://{url to DB}
@@ -54,6 +52,19 @@ spring.datasource.username={user in DB}
 spring.datasource.password={password for user to DB}
 spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults = false
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.show-sql=true
+#spring.jpa.properties.hibernate.format_sql=true
+
+# spring cloud
+spring.cloud.refresh.enabled = false
+
+# Jackson (e.g. converting Java 8 dates to ISO format
+spring.jackson.serialization.write_dates_as_timestamps=false 
+spring.jackson.property-naming-strategy=SNAKE_CASE
+
+# to fix: Method jmxMBeanExporter in org.springframework.boot.actuate.autoconfigure.endpoint.jmx.JmxEndpointAutoConfiguration
+spring.jmx.enabled = false
 
 # FLYWAY
 spring.flyway.url=jdbc:postgresql://{url to DB}
@@ -69,13 +80,6 @@ logging.level.org.springframework.web= ERROR
 logging.level.org.apache.commons.dbcp2= DEBUG  
 logging.level.org.hibernate=ERROR
 logging.file = logs/rest-training.log  
-
-# Jackson (e.g. converting Java 8 dates to ISO format
-spring.jackson.serialization.write_dates_as_timestamps=false 
-spring.jackson.property-naming-strategy=SNAKE_CASE
-
-# to fix: Method jmxMBeanExporter in org.springframework.boot.actuate.autoconfigure.endpoint.jmx.JmxEndpointAutoConfiguration required a single bean, but 2 were found: (objMapperESClient,objectMapperForRestAPI)
-spring.jmx.enabled = false
 
 ```
 
@@ -119,12 +123,34 @@ The project was built and tested with these technologies, so if you have any une
 
 ```
 Maven         : 3.3.9
-Java          : 1.8.0_144, vendor: Oracle Corporation
-Spring boot   : 2.0.6.RELEASE
-Swagger       : 2.8.0
-Hibernate     : 5.2.8.Final
-Jackson       : 2.9.0
-Tomcat        : 8
-PostgreSQL    : 9.5
+Java          : OpenJDK 11
+Spring Boot   : 2.1.1.RELEASE
+Swagger       : 2.9.2
+Hibernate     : 5.3.7.Final
+Jackson       : 2.9.7
+Tomcat        : 9
+PostgreSQL    : 11
 ```
 
+## Installing technologies on Debian based system
+### Installing Java
+Follow the steps in the following link: https://dzone.com/articles/installing-openjdk-11-on-ubuntu-1804-for-real
+
+Verify the installation:
+```
+$ java -version
+```
+
+Do not forget to set OpenJDK in IntelliJ IDEA in all the places. The tutorial for setting OpenJDK in IntelliJ IDEA in all the places is shown in the following link: [https://stackoverflow.com/a/26009627/2892314].
+### Installing Maven
+```
+$ apt-cache search maven
+$ sudo apt-get install maven
+```
+Verify the installation:
+```
+$ mvn -v
+```
+
+### PostgreSQL installation 
+Follow the steps in the following link: [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04]
