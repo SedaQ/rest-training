@@ -220,9 +220,9 @@
     <modules>
         <module>persistence</module>
         <module>service</module>
-        <module>facade</module>
         <module>rest</module>
         <module>rest-clients</module>
         <module>security</module>
+        <module>api</module>
     </modules>
 </project>

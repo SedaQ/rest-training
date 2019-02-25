@@ -30,7 +30,7 @@
     <dependencies>
         <dependency>
             <groupId>com.sedaq.training.rest</groupId>
-            <artifactId>facade</artifactId>
+            <artifactId>service</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

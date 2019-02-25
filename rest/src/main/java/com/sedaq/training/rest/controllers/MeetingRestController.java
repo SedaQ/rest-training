@@ -1,11 +1,14 @@
 package com.sedaq.training.rest.controllers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sedaq.training.api.PageResultResource;
+import com.sedaq.training.api.dto.MeetingDTO;
+import com.sedaq.training.exceptions.FacadeLayerException;
+import com.sedaq.training.facade.MeetingFacade;
 import com.sedaq.training.rest.utils.annotations.ApiPageableSwagger;
 import io.swagger.annotations.*;
 import org.jsondoc.core.annotation.ApiObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
@@ -24,10 +27,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
 import com.github.bohnman.squiggly.util.SquigglyUtils;
 import com.querydsl.core.types.Predicate;
-import com.sedaq.training.facade.api.PageResultResource;
-import com.sedaq.training.facade.api.dto.meeting.MeetingDTO;
-import com.sedaq.training.facade.exceptions.FacadeLayerException;
-import com.sedaq.training.facade.iface.MeetingFacade;
 import com.sedaq.training.persistence.model.Meeting;
 import com.sedaq.training.rest.exceptions.ResourceNotFoundException;
 import com.sedaq.training.rest.utils.HttpHeadersAcceptAndContentType;
