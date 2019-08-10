@@ -12,12 +12,11 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>com.sedaq.training.rest</groupId>
+            <artifactId>service</artifactId>
+            <version>1.0.0</version>
         </dependency>
-        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@Import(PersistenceConfig.class)
+@Import({PersistenceConfig.class, BCryptEncoder.class})
 @ComponentScan(basePackages = {"com.sedaq.training.service", "com.sedaq.training.facade", "com.sedaq.training.mapping"})
 public class ServiceConfig {
 

@@ -121,7 +121,6 @@ public class PersonRestController {
             nickname = "createPerson",
             produces = "application/json"
     )
-    @ExceptionHandler
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PersonCreateDTO> createPerson(
             @ApiParam(value = "Person to be created")

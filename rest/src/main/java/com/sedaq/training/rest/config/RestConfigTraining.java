@@ -1,6 +1,5 @@
 package com.sedaq.training.rest.config;
 
-//import com.sedaq.training.security.RestSecurityConfiguration;
 import com.sedaq.training.config.ServiceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,7 +32,7 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
  */
 @SpringBootApplication(scanBasePackages = "com.sedaq.training.rest")
 @EnableSpringDataWebSupport
-@Import({ServiceConfig.class, /*RestSecurityConfiguration.class*/})
+@Import({ServiceConfig.class, com.sedaq.training.security.RestSecurityConfiguration.class})
 @PropertySource("file:${path.to.config.file}")
 public class RestConfigTraining extends SpringBootServletInitializer {
 
