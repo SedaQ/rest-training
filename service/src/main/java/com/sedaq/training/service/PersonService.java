@@ -2,6 +2,7 @@ package com.sedaq.training.service;
 
 import java.util.Optional;
 
+import com.sedaq.training.annotations.security.IsUser;
 import com.sedaq.training.exceptions.ServiceLayerException;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.querydsl.core.types.Predicate;
@@ -28,6 +30,7 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    @IsUser
     public Optional<Person> findById(Long id) {
         try {
             return personRepository.findById(id);
