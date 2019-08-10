@@ -5,6 +5,7 @@ import com.sedaq.training.api.dto.PersonCreateDTO;
 import com.sedaq.training.api.dto.PersonDTO;
 import com.sedaq.training.exceptions.FacadeLayerException;
 import com.sedaq.training.facade.PersonFacade;
+import com.sedaq.training.rest.ApiErrorTraining;
 import com.sedaq.training.rest.exceptions.ResourceNotCreatedException;
 import com.sedaq.training.rest.utils.annotations.ApiPageableSwagger;
 import io.swagger.annotations.*;
@@ -26,11 +27,13 @@ import com.sedaq.training.persistence.model.Person;
 import com.sedaq.training.rest.exceptions.ResourceNotFoundException;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Pavel Šeda
  */
-@Api(value = "/persons", consumes = "application/json or application/xml")
+@Api(value = "/persons", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController
 @RequestMapping(value = "/persons")
 public class PersonRestController {
@@ -118,6 +121,7 @@ public class PersonRestController {
             nickname = "createPerson",
             produces = "application/json"
     )
+    @ExceptionHandler
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PersonCreateDTO> createPerson(
             @ApiParam(value = "Person to be created")
