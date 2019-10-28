@@ -73,7 +73,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>sedaq-rest-training-${project.version}</finalName>
         <plugins>
             <!-- Package as an executable jar -->
             <plugin>

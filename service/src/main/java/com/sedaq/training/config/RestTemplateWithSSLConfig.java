@@ -40,7 +40,7 @@ public class RestTemplateWithSSLConfig {
     @Value("${server.ssl.trust-store-password}")
     private String trustStorePassword;
 
-    @Bean
+    @Bean("restTemplateWithSSL")
     public RestTemplate restTemplate() throws Exception{
         SSLContext sslContext = new SSLContextBuilder()
                 .loadTrustMaterial(new File(trustStore), trustStorePassword.toCharArray())
