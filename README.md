@@ -93,7 +93,7 @@ $ mvn flyway:migrate -Djdbc.url=jdbc:postgresql://{url to DB}/rest-training -Djd
 ```
 e.g.:
 ```
-$ mvn flyway:migrate -Djdbc.url=jdbc:postgresql://localhost:5432/rest-training -Djdbc.username=postgres -Djdbc.password=postgre
+$ mvn flyway:migrate -Djdbc.url=jdbc:postgresql://localhost:5432/rest-training -Djdbc.username=postgres -Djdbc.password=postgres
 
 ```
 
