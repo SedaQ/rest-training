@@ -12,4 +12,4 @@ COPY --from=build /app/etc/training.properties /app/etc/training.properties
 
 WORKDIR /app
 EXPOSE 8080
-ENTRYPOINT ["java", "Dspring.config.location=/app/etc/training.properties", "-jar", "/app/sedaq-rest.jar"]
+ENTRYPOINT ["java", "-Dspring.config.location=/app/etc/training.properties", "-jar", "/app/sedaq-rest.jar"]
