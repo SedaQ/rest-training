@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -22,11 +21,11 @@ import java.util.Objects;
 public class PersonDTO {
 
     @ApiModelProperty(value = "Person ID.", example = "1")
-    private Long idPerson;
+    private Long id;
     @ApiModelProperty(value = "Person email.", example = "pavelseda@email.cz")
     private String email;
     @JsonProperty(access = Access.WRITE_ONLY)
-    private char[] pwd;
+    private String pwd;
     @ApiModelProperty(value = "Person nickname.", example = "SedaQ")
     private String nickname;
     @ApiModelProperty(value = "Person first name.", example = "Pavel")
@@ -42,19 +41,19 @@ public class PersonDTO {
         // used to inicialize mapping from entity
     }
 
-    public Long getIdPerson() {
-        return idPerson;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPerson(Long idPerson) {
-        this.idPerson = idPerson;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public char[] getPwd() {
+    public String getPwd() {
         return pwd;
     }
 
-    public void setPwd(char[] pwd) {
+    public void setPwd(String pwd) {
         this.pwd = pwd;
     }
 
@@ -125,25 +124,15 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PersonDTO [idPerson=");
-        builder.append(idPerson);
-        builder.append(", email=");
-        builder.append(email);
-        builder.append(", pwd=");
-        builder.append(Arrays.toString(pwd));
-        builder.append(", nickname=");
-        builder.append(nickname);
-        builder.append(", firstName=");
-        builder.append(firstName);
-        builder.append(", surname=");
-        builder.append(surname);
-        builder.append(", birthday=");
-        builder.append(birthday);
-        builder.append(", age=");
-        builder.append(age);
-        builder.append("]");
-        return builder.toString();
+        return "PersonDTO{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthday=" + birthday +
+                ", age=" + age +
+                '}';
     }
-
 }

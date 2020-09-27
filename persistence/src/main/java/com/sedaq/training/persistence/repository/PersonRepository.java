@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * @author Pavel Šeda
  */
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long>, QuerydslPredicateExecutor<Person> {
+public interface PersonRepository extends JpaRepository<Person, Long>, QuerydslPredicateExecutor<Person>, PersonRepositoryCustom {
 
     @Query("SELECT p FROM Person p WHERE p.email = :email")
     Person findPersonByEmail(@Param("email") String email);

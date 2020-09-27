@@ -10,7 +10,7 @@ import com.sedaq.training.annotations.transactions.TransactionalWO;
 import com.sedaq.training.exceptions.FacadeLayerException;
 import com.sedaq.training.exceptions.ServiceLayerException;
 import com.sedaq.training.service.MeetingService;
-import com.sedaq.training.mapping.BeanMapping;
+import com.sedaq.training.mapping.modelmapper.BeanMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

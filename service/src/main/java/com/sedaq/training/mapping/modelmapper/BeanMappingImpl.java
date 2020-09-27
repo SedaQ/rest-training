@@ -1,4 +1,4 @@
-package com.sedaq.training.mapping;
+package com.sedaq.training.mapping.modelmapper;
 
 import com.sedaq.training.api.PageResultResource;
 import org.modelmapper.ModelMapper;

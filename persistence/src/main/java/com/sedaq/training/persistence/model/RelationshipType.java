@@ -21,9 +21,9 @@ import javax.persistence.Table;
 public class RelationshipType implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_relationship_type", updatable = false, nullable = false)
-    private Long idRelationshipType;
+    private Long id;
     @Column(nullable = false, unique = true)
     private String title;
     @OneToMany(targetEntity = Relationship.class, mappedBy = "relationshipType")
@@ -33,12 +33,12 @@ public class RelationshipType implements Serializable {
         // hibernate requires non-args constructor
     }
 
-    public Long getIdRelationshipType() {
-        return idRelationshipType;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdRelationshipType(Long idRelationshipType) {
-        this.idRelationshipType = idRelationshipType;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -76,13 +76,9 @@ public class RelationshipType implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("RelationshipType [idRelationshipType=");
-        builder.append(idRelationshipType);
-        builder.append(", title=");
-        builder.append(title);
-        builder.append("]");
-        return builder.toString();
+        return "RelationshipType{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
-
 }

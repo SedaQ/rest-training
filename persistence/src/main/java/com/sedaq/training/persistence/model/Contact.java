@@ -19,9 +19,9 @@ import javax.persistence.Table;
 public class Contact implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_contact", updatable = false, nullable = false)
-    private Long idContact;
+    private Long id;
     @Column(nullable = false, length = 45)
     private String contact;
     @ManyToOne
@@ -35,12 +35,12 @@ public class Contact implements Serializable {
         // hibernate requires non-args constructor
     }
 
-    public Long getIdContact() {
-        return idContact;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdContact(Long idContact) {
-        this.idContact = idContact;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContact() {
@@ -69,17 +69,9 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Contact [idContact=");
-        builder.append(idContact);
-        builder.append(", contact=");
-        builder.append(contact);
-        builder.append(", person=");
-        builder.append(person);
-        builder.append(", contactType=");
-        builder.append(contactType);
-        builder.append("]");
-        return builder.toString();
+        return "Contact{" +
+                "id=" + id +
+                ", contact='" + contact + '\'' +
+                '}';
     }
-
 }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class MeetingDTO {
 
     @ApiModelProperty(value = "Meeting ID.", example = "1")
-    private Long idMeeting;
+    private Long id;
     @ApiModelProperty(value = "Meeting start time.", example = "2018-11-21T22:51:03.303998800")
     private LocalDateTime startTime;
     @ApiModelProperty(value = "Meeting duration.", example = "PT30M")
@@ -28,12 +28,12 @@ public class MeetingDTO {
         // used to inicialize mapping from entity
     }
 
-    public Long getIdMeeting() {
-        return idMeeting;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdMeeting(Long idMeeting) {
-        this.idMeeting = idMeeting;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getStartTime() {
@@ -71,8 +71,8 @@ public class MeetingDTO {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("MeetingDTO [idMeeting=");
-        builder.append(idMeeting);
+        builder.append("MeetingDTO [id=");
+        builder.append(id);
         builder.append(", startTime=");
         builder.append(startTime);
         builder.append(", duration=");

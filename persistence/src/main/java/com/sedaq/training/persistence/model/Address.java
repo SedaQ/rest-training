@@ -22,9 +22,9 @@ import javax.persistence.Table;
 public class Address implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_address", updatable = false, nullable = false)
-    private Long idAddress;
+    private Long id;
     @Column(nullable = false, length = 45)
     private String city;
     @Column(nullable = false, length = 45)
@@ -40,12 +40,12 @@ public class Address implements Serializable {
         //hibernate requires non-args constructor
     }
 
-    public Long getIdAddress() {
-        return idAddress;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdAddress(Long idAddress) {
-        this.idAddress = idAddress;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCity() {
@@ -108,21 +108,12 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Address [idAddress=");
-        builder.append(idAddress);
-        builder.append(", city=");
-        builder.append(city);
-        builder.append(", street=");
-        builder.append(street);
-        builder.append(", houseNumber=");
-        builder.append(houseNumber);
-        builder.append(", zipCode=");
-        builder.append(zipCode);
-        builder.append(", persons=");
-        builder.append(persons);
-        builder.append("]");
-        return builder.toString();
+        return "Address{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", houseNumber=" + houseNumber +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
     }
-
 }

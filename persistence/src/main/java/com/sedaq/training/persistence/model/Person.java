@@ -30,14 +30,14 @@ import org.hibernate.annotations.NaturalId;
 public class Person implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_person", updatable = false, nullable = false)
-    private Long idPerson;
+    private Long id;
     @NaturalId
     @Column(nullable = false, length = 100)
     private String email;
     @Column(nullable = false)
-    private char[] pwd;
+    private String pwd;
     @Column(nullable = false, length = 45)
     private String nickname;
     @Column(nullable = false, length = 45)
@@ -64,12 +64,12 @@ public class Person implements Serializable {
         // hibernate requires non-args constructor
     }
 
-    public Long getIdPerson() {
-        return idPerson;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPerson(Long idPerson) {
-        this.idPerson = idPerson;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -80,11 +80,11 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public char[] getPwd() {
+    public String getPwd() {
         return pwd;
     }
 
-    public void setPwd(char[] pwd) {
+    public void setPwd(String pwd) {
         this.pwd = pwd;
     }
 
@@ -195,35 +195,15 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Person [idPerson=");
-        builder.append(idPerson);
-        builder.append(", email=");
-        builder.append(email);
-        builder.append(", pwd=");
-        builder.append(Arrays.toString(pwd));
-        builder.append(", nickname=");
-        builder.append(nickname);
-        builder.append(", firstName=");
-        builder.append(firstName);
-        builder.append(", surname=");
-        builder.append(surname);
-        builder.append(", birthday=");
-        builder.append(birthday);
-        builder.append(", age=");
-        builder.append(age);
-        builder.append(", meetings=");
-        builder.append(meetings);
-        builder.append(", address=");
-        builder.append(address);
-        builder.append(", contacts=");
-        builder.append(contacts);
-        builder.append(", persons1=");
-        builder.append(persons1);
-        builder.append(", persons2=");
-        builder.append(persons2);
-        builder.append("]");
-        return builder.toString();
+        return "Person{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthday=" + birthday +
+                ", age=" + age +
+                '}';
     }
-
 }

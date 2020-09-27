@@ -21,7 +21,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.querydsl.SimpleEntityPathResolver;
 import org.springframework.data.querydsl.binding.QuerydslBindingsFactory;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -98,7 +97,7 @@ public class PersonRestControllerIT {
     public void findTrainingRunById() throws Exception {
         Person personExpected = personRepository.save(person);
 
-        MockHttpServletResponse result = mvc.perform(get("/persons/{id}", personExpected.getIdPerson()))
+        MockHttpServletResponse result = mvc.perform(get("/persons/{id}", personExpected.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();

@@ -18,9 +18,9 @@ import javax.persistence.Table;
 @Table(name = "relationship")
 public class Relationship implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_relationship", updatable = false, nullable = false)
-    private Long idRelationship;
+    private Long id;
     @Column(nullable = true, length = 200)
     private String note;
     @ManyToOne
@@ -37,12 +37,12 @@ public class Relationship implements Serializable {
         // hibernate requires non-args constructor
     }
 
-    public Long getIdRelationship() {
-        return idRelationship;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdRelationship(Long idRelationship) {
-        this.idRelationship = idRelationship;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNote() {
@@ -79,19 +79,9 @@ public class Relationship implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Relationship [idRelationship=");
-        builder.append(idRelationship);
-        builder.append(", note=");
-        builder.append(note);
-        builder.append(", relationshipType=");
-        builder.append(relationshipType);
-        builder.append(", person1=");
-        builder.append(person1);
-        builder.append(", person2=");
-        builder.append(person2);
-        builder.append("]");
-        return builder.toString();
+        return "Relationship{" +
+                "id=" + id +
+                ", note='" + note + '\'' +
+                '}';
     }
-
 }

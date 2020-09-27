@@ -237,7 +237,7 @@ Information about meeting.
 |Name|Description|Schema
 |*duration* +
 _optional_|Meeting duration.|<<_duration,Duration>>
-|*idMeeting* +
+|*id* +
 _optional_|Meeting ID.|integer(int64)
 |*note* +
 _optional_|Meeting note.|string
@@ -264,7 +264,7 @@ _optional_|Person birthday.|string(date)
 _optional_|Person email.|string
 |*firstName* +
 _optional_|Person first name.|string
-|*idPerson* +
+|*id* +
 _optional_|Person ID.|integer(int64)
 |*nickname* +
 _optional_|Person nickname.|string

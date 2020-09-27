@@ -38,7 +38,7 @@ public class PersonRepositoryTest {
         person.setFirstName("Pavel");
         person.setNickname("SedaQ");
         person.setSurname("Seda");
-        person.setPwd("batman".toCharArray());
+        person.setPwd("batman");
     }
 
     @Test

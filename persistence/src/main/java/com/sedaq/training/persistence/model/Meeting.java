@@ -26,9 +26,9 @@ import javax.persistence.Table;
 public class Meeting implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_meeting", updatable = false, nullable = false)
-    private Long idMeeting;
+    private Long id;
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
     @Column(name = "duration", nullable = false)
@@ -46,12 +46,12 @@ public class Meeting implements Serializable {
         // hibernate requires non-args constructor
     }
 
-    public Long getIdMeeting() {
-        return idMeeting;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdMeeting(Long idMeeting) {
-        this.idMeeting = idMeeting;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getStartTime() {
@@ -100,21 +100,12 @@ public class Meeting implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Meeting [idMeeting=");
-        builder.append(idMeeting);
-        builder.append(", startTime=");
-        builder.append(startTime);
-        builder.append(", duration=");
-        builder.append(duration);
-        builder.append(", place=");
-        builder.append(place);
-        builder.append(", note=");
-        builder.append(note);
-        builder.append(", persons=");
-        builder.append(persons);
-        builder.append("]");
-        return builder.toString();
+        return "Meeting{" +
+                "id=" + id +
+                ", startTime=" + startTime +
+                ", duration=" + duration +
+                ", place='" + place + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
-
 }

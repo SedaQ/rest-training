@@ -22,9 +22,9 @@ import javax.persistence.Table;
 public class ContactType implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_contact_type", updatable = false, nullable = false)
-    private Long idContactType;
+    private Long id;
     @Column(nullable = false, length = 45, unique = true)
     private String title;
     @OneToMany(targetEntity = Contact.class, mappedBy = "contactType")
@@ -34,12 +34,12 @@ public class ContactType implements Serializable {
         // hibernate requires non-args constructor
     }
 
-    public Long getIdContactType() {
-        return idContactType;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdContactType(Long idContactType) {
-        this.idContactType = idContactType;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -77,15 +77,9 @@ public class ContactType implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("ContactType [idContactType=");
-        builder.append(idContactType);
-        builder.append(", title=");
-        builder.append(title);
-        builder.append(", contacts=");
-        builder.append(contacts);
-        builder.append("]");
-        return builder.toString();
+        return "ContactType{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
-
 }

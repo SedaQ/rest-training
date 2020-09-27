@@ -20,7 +20,7 @@ public class PersonCreateDTO {
     @ValidEmail(message = "{personcreate.email.ValidEmail.message}")
     private String email;
     @JsonProperty(access = Access.WRITE_ONLY)
-    private char[] pwd;
+    private String pwd;
     @ApiModelProperty(value = "Person nickname.", example = "SedaQ")
     private String nickname;
     @ApiModelProperty(value = "Person first name.", example = "Pavel")
@@ -36,7 +36,7 @@ public class PersonCreateDTO {
     public PersonCreateDTO() {
     }
 
-    public PersonCreateDTO(String email, char[] pwd, String nickname, String firstName, String surname,
+    public PersonCreateDTO(String email, String pwd, String nickname, String firstName, String surname,
                            @Past(message = "{personcreate.birthday.Past.message}") LocalDate birthday, Integer age) {
         super();
         this.email = email;
@@ -56,11 +56,11 @@ public class PersonCreateDTO {
         this.email = email;
     }
 
-    public char[] getPwd() {
+    public String getPwd() {
         return pwd;
     }
 
-    public void setPwd(char[] pwd) {
+    public void setPwd(String pwd) {
         this.pwd = pwd;
     }
 
@@ -106,23 +106,14 @@ public class PersonCreateDTO {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PersonCreateDTO [email=");
-        builder.append(email);
-        builder.append(", pwd=");
-        builder.append(Arrays.toString(pwd));
-        builder.append(", nickname=");
-        builder.append(nickname);
-        builder.append(", firstName=");
-        builder.append(firstName);
-        builder.append(", surname=");
-        builder.append(surname);
-        builder.append(", birthday=");
-        builder.append(birthday);
-        builder.append(", age=");
-        builder.append(age);
-        builder.append("]");
-        return builder.toString();
+        return "PersonCreateDTO{" +
+                "email='" + email + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthday=" + birthday +
+                ", age=" + age +
+                '}';
     }
-
 }
