@@ -65,7 +65,7 @@
         <jersey-media-json-jackson.version>2.27</jersey-media-json-jackson.version>
 
         <!-- jackson datatype -->
-        <jackson-datatype.version>2.9.7</jackson-datatype.version>
+        <jackson-datatype.version>2.9.8</jackson-datatype.version>
         <!-- spring dependencies -->
         <spring-security-core>5.0.9.RELEASE</spring-security-core>
         <!-- spring cloud -->
