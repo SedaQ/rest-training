@@ -7,16 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Pavel Šeda
@@ -26,7 +17,8 @@ import javax.persistence.Table;
 public class Meeting implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "meeting_id_meeting_seq")
+    @SequenceGenerator(name = "meeting_id_meeting_seq", sequenceName = "meeting_id_meeting_seq", initialValue = 1, allocationSize = 50)
     @Column(name = "id_meeting", updatable = false, nullable = false)
     private Long id;
     @Column(name = "start_time", nullable = false)

@@ -6,13 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Pavel Šeda
@@ -22,7 +16,8 @@ import javax.persistence.Table;
 public class Address implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_id_address_seq")
+    @SequenceGenerator(name = "address_id_address_seq", sequenceName = "address_id_address_seq", initialValue = 1, allocationSize = 50)
     @Column(name = "id_address", updatable = false, nullable = false)
     private Long id;
     @Column(nullable = false, length = 45)

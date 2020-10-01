@@ -8,17 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -30,7 +20,8 @@ import org.hibernate.annotations.NaturalId;
 public class Person implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_id_person_seq")
+    @SequenceGenerator(name = "person_id_person_seq", sequenceName = "person_id_person_seq", initialValue = 1, allocationSize = 50)
     @Column(name = "id_person", updatable = false, nullable = false)
     private Long id;
     @NaturalId

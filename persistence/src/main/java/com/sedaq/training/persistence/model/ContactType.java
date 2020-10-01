@@ -6,13 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Pavel Šeda
@@ -22,7 +16,8 @@ import javax.persistence.Table;
 public class ContactType implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_type_id_contact_type_seq")
+    @SequenceGenerator(name = "contact_type_id_contact_type_seq", sequenceName = "contact_type_id_contact_type_seq", initialValue = 1, allocationSize = 50)
     @Column(name = "id_contact_type", updatable = false, nullable = false)
     private Long id;
     @Column(nullable = false, length = 45, unique = true)
