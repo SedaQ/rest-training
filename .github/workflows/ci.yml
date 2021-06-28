@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '8'
+          java-version: '11'
         - run: mvn clean test
   build:
     runs-on: ubuntu-latest
@@ -17,5 +17,5 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '8'
+          java-version: '11'
         - run: mvn clean install -DskipTests=true
