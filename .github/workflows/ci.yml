@@ -9,13 +9,13 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '8'
-      - run: mvn clean test
+        - run: mvn clean test
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '8'
-      - run: mvn clean install -DskipTests=true
+        with:
+          distribution: 'adopt'
+          java-version: '8'
+        - run: mvn clean install -DskipTests=true
