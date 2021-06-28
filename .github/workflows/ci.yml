@@ -1,4 +1,4 @@
-name: learn-github-actions
+name: ci-settings
 on: [push]
 jobs:
   test:
