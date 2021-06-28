@@ -9,6 +9,12 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '11'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - run: mvn clean test
   build:
     runs-on: ubuntu-latest
@@ -19,4 +25,10 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '11'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - run: mvn clean install -DskipTests=true
