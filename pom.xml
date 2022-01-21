@@ -78,7 +78,7 @@
         <squiggly.filter.jackson.version>1.3.11</squiggly.filter.jackson.version>
 
         <!-- H2 version -->
-        <h2.version>1.4.199</h2.version>
+        <h2.version>2.1.210</h2.version>
         <!-- MapStruct -->
         <mapstruct.version>1.3.0.Final</mapstruct.version>
     </properties>
